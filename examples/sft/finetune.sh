@@ -11,23 +11,26 @@ export CUDA_DEVICE_MAX_CONNECTIONS=1
 GPUS_PER_NODE=$(python -c 'import torch; print(torch.cuda.device_count())')
 
 # Number of GPU workers, for single-worker training, please set to 1
-NNODES=${NNODES:-1}
+# NNODES=${NNODES:-1}
+NNODES=1
 
 # The rank of this worker, should be in {0, ..., WORKER_CNT-1}, for single-worker training, please set to 0
-NODE_RANK=${NODE_RANK:-0}
+# NODE_RANK=${NODE_RANK:-0}
+NODE_RANK=0
 
 # The ip address of the rank-0 worker, for single-worker training, please set to localhost
-MASTER_ADDR=${MASTER_ADDR:-localhost}
+# MASTER_ADDR=${MASTER_ADDR:-localhost}
+MASTER_ADDR="127.0.0.1"
 
 # The port for communication
 MASTER_PORT=${MASTER_PORT:-6001}
 
-MODEL="Qwen/Qwen2-7B" # Set the path if you do not want to load from huggingface directly
+MODEL="Qwen/Qwen2-1.5B" # Set the path if you do not want to load from huggingface directly
 # ATTENTION: specify the path to your training data, which should be a json file consisting of a list of conversations.
 # See https://qwen.readthedocs.io/en/latest/training/SFT/example.html#data-preparation for more information.
-DATA="example_data.jsonl"
+DATA="../qwen2_gsm8k_train.json"
 DS_CONFIG_PATH="ds_config_zero3.json"
-USE_LORA=False
+USE_LORA=True
 Q_LORA=False
 
 function usage() {
@@ -78,7 +81,7 @@ DISTRIBUTED_ARGS="
     --master_port $MASTER_PORT
 "
 
-torchrun $DISTRIBUTED_ARGS finetune.py \
+torchrun $DISTRIBUTED_ARGS examples/sft/finetune.py \
     --model_name_or_path $MODEL \
     --data_path $DATA \
     --bf16 True \
