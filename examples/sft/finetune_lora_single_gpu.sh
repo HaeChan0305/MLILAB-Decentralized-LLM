@@ -1,7 +1,8 @@
 #!/bin/bash
 export CUDA_DEVICE_MAX_CONNECTIONS=1
 
-MODEL="Qwen/Qwen2-1.5B-Instruct" # Set the path if you do not want to load from huggingface directly
+#asdfasdfadsfadfasdfs
+MODEL="Qwen/Qwen2-7B-Instruct" # Set the path if you do not want to load from huggingface directly
 # ATTENTION: specify the path to your training data, which should be a json file consisting of a list of conversations.
 # See the section for finetuning in README for more information.
 DATA="gsm8k/gsm8k_train.jsonl"
@@ -42,7 +43,7 @@ python ./examples/sft/finetune.py \
   --data_path $DATA \
   --do_train True \
   --bf16 True \
-  --output_dir gsm8k/output_qwen_1_3 \
+  --output_dir gsm8k/output_qwen_1_1 \
   --num_train_epochs 2 \
   --per_device_train_batch_size 8 \
   --gradient_accumulation_steps 4 \
