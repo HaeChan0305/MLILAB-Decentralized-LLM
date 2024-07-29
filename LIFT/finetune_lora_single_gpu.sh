@@ -1,10 +1,10 @@
 #!/bin/bash
 export CUDA_DEVICE_MAX_CONNECTIONS=1
 
-MODEL="Qwen/Qwen2-1.5B-Instruct" # Set the path if you do not want to load from huggingface directly
+MODEL="Qwen/Qwen2-7B-Instruct" # Set the path if you do not want to load from huggingface directly
 # ATTENTION: specify the path to your training data, which should be a json file consisting of a list of conversations.
 # See the section for finetuning in README for more information.
-DATA="pollen_train_2.jsonl"
+DATA="./pollen_classification/pollen_train.jsonl"
 # EVAL_DATA="../qwen2_gsm8k_test.jsonl"
 
 function usage() {
@@ -42,12 +42,12 @@ python finetune.py \
   --data_path $DATA \
   --do_train True \
   --bf16 True \
-  --output_dir output_qwen_3_2 \
+  --output_dir output_qwen_4_0 \
   --num_train_epochs 15 \
-  --per_device_train_batch_size 2 \
-  --gradient_accumulation_steps 4 \
+  --per_device_train_batch_size 8 \
+  --gradient_accumulation_steps 1 \
   --save_strategy "steps" \
-  --save_steps 200 \
+  --save_steps 400 \
   --learning_rate 2e-4 \
   --weight_decay 0.01 \
   --adam_beta2 0.95 \

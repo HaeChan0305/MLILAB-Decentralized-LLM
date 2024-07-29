@@ -1,7 +1,8 @@
+# bash examples/sft/finetune_lora_single_gpu.sh
+
 #!/bin/bash
 export CUDA_DEVICE_MAX_CONNECTIONS=1
 
-#asdfasdfadsfadfasdfs
 MODEL="Qwen/Qwen2-7B-Instruct" # Set the path if you do not want to load from huggingface directly
 # ATTENTION: specify the path to your training data, which should be a json file consisting of a list of conversations.
 # See the section for finetuning in README for more information.
