@@ -24,7 +24,7 @@ def processing_text(tokenizer, messages):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test HF checkpoint.")
-    parser.add_argument("-c", "--checkpoint-path", type=str, help="Checkpoint path", default="Qwen/Qwen2-1.5B-Instruct")
+    parser.add_argument("-c", "--checkpoint-path", type=str, help="Checkpoint path", default="Qwen/Qwen2-7B-Instruct")
     # parser.add_argument("-f", "--sample-input-file", type=str, default=None)
     parser.add_argument("-o", "--sample-output-file", type=str)
     parser.add_argument("-b", "--batch-size", type=int, default=1)
@@ -32,10 +32,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     test = []
-    with jsonlines.open("pollen_test.jsonl") as file:
+    with jsonlines.open("./pollen_classification/pollen_test.jsonl") as file:
         for line in file:
             test.append(line)
-    # import pdb;pdb.set_trace()
     test = [example["messages"] for example in test]
 
     device = "cuda" # the device to load the model onto
