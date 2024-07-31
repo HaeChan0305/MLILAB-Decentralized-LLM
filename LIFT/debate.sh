@@ -1,7 +1,7 @@
-STEP=200
+STEP=400
 for i in {1..15}
 do
-    echo "checkpoint-$((STEP * i))"
+    # echo "checkpoint-$((STEP * i))"
     # python processing_test_debate.py -c $((STEP * i)) -c1 1 -c2 2 -r 1
     # python processing_test_debate.py -c $((STEP * i)) -c1 2 -c2 1 -r 1
     # python debate.py -c /workspace/output_qwen_4_1/checkpoint-$((STEP * i)) -b 8 -r 1

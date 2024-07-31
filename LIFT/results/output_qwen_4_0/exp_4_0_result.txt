@@ -1,0 +1,90 @@
+
+========= /workspace/output_qwen_4_0/checkpoint-400/result.json =========
+Accuracy :  0.5121107266435986
+Precision :  0.5114754098360655
+Recall :  0.5397923875432526
+F1-score :  0.26262626262626265
+
+========= /workspace/output_qwen_4_0/checkpoint-800/result.json =========
+Accuracy :  0.4273356401384083
+Precision :  0.42105263157894735
+Recall :  0.3875432525951557
+F1-score :  0.20180180180180182
+
+========= /workspace/output_qwen_4_0/checkpoint-1200/result.json =========
+Accuracy :  0.49653979238754326
+Precision :  0.49615384615384617
+Recall :  0.4463667820069204
+F1-score :  0.2349726775956284
+
+========= /workspace/output_qwen_4_0/checkpoint-1600/result.json =========
+Accuracy :  0.5397923875432526
+Precision :  0.5379537953795379
+Recall :  0.5640138408304498
+F1-score :  0.27533783783783783
+
+========= /workspace/output_qwen_4_0/checkpoint-2000/result.json =========
+Accuracy :  0.5224913494809689
+Precision :  0.5247148288973384
+Recall :  0.47750865051903113
+F1-score :  0.25
+
+========= /workspace/output_qwen_4_0/checkpoint-2400/result.json =========
+Accuracy :  0.5103806228373703
+Precision :  0.5095541401273885
+Recall :  0.5536332179930796
+F1-score :  0.26533996683250416
+
+========= /workspace/output_qwen_4_0/checkpoint-2800/result.json =========
+Accuracy :  0.48961937716262977
+Precision :  0.4878048780487805
+Recall :  0.41522491349480967
+F1-score :  0.22429906542056072
+
+========= /workspace/output_qwen_4_0/checkpoint-3200/result.json =========
+Accuracy :  0.486159169550173
+Precision :  0.4862068965517241
+Recall :  0.48788927335640137
+F1-score :  0.24352331606217614
+
+========= /workspace/output_qwen_4_0/checkpoint-3600/result.json =========
+Accuracy :  0.47923875432525953
+Precision :  0.4805194805194805
+Recall :  0.5121107266435986
+F1-score :  0.24790619765494135
+
+========= /workspace/output_qwen_4_0/checkpoint-4000/result.json =========
+Accuracy :  0.5069204152249135
+Precision :  0.5075757575757576
+Recall :  0.46366782006920415
+F1-score :  0.24231464737793848
+
+========= /workspace/output_qwen_4_0/checkpoint-4400/result.json =========
+Accuracy :  0.48788927335640137
+Precision :  0.4864864864864865
+Recall :  0.4359861591695502
+F1-score :  0.2299270072992701
+
+========= /workspace/output_qwen_4_0/checkpoint-4800/result.json =========
+Accuracy :  0.48961937716262977
+Precision :  0.48760330578512395
+Recall :  0.4083044982698962
+F1-score :  0.2222222222222222
+
+========= /workspace/output_qwen_4_0/checkpoint-5200/result.json =========
+Accuracy :  0.48788927335640137
+Precision :  0.48616600790513836
+Recall :  0.42560553633217996
+F1-score :  0.22693726937269373
+
+========= /workspace/output_qwen_4_0/checkpoint-5600/result.json =========
+Accuracy :  0.4913494809688581
+Precision :  0.49070631970260226
+Recall :  0.45674740484429066
+F1-score :  0.23655913978494628
+
+========= /workspace/output_qwen_4_0/checkpoint-6000/result.json =========
+Accuracy :  0.4982698961937716
+Precision :  0.49834983498349833
+Recall :  0.5224913494809689
+F1-score :  0.25506756756756754
