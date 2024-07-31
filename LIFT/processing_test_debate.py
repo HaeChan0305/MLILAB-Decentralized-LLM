@@ -31,10 +31,10 @@ if __name__ == "__main__":
     test = []
     
     if args.round == 1:
-        prev_test_path = "pollen_test.jsonl"
+        prev_test_path = "./pollen_classificatin/pollen_test.jsonl"
         prev_result_path = f"result.json"
     else:
-        prev_test_path = f"output_qwen_3_{args.client1}/checkpoint-{args.checkpoint}/pollen_test_round_{args.round - 1}.jsonl"
+        prev_test_path = f"output_qwen_4_{args.client1}/checkpoint-{args.checkpoint}/pollen_test_round_{args.round - 1}.jsonl"
         prev_result_path = f"result_round_{args.round - 1}.json"
         
     with jsonlines.open(prev_test_path) as file:
@@ -42,11 +42,11 @@ if __name__ == "__main__":
             test.append(line)
 
 
-    with open(f"output_qwen_3_{args.client1}/checkpoint-{args.checkpoint}/{prev_result_path}", "r") as file:
+    with open(f"/workspace/output_qwen_4_{args.client1}/checkpoint-{args.checkpoint}/{prev_result_path}", "r") as file:
         client_1 = json.load(file)
         client_1_answers = [extract_answer(d['prediction']) for d in client_1]
         
-    with open(f"output_qwen_3_{args.client2}/checkpoint-{args.checkpoint}/{prev_result_path}", "r") as file:
+    with open(f"/workspace/output_qwen_4_{args.client2}/checkpoint-{args.checkpoint}/{prev_result_path}", "r") as file:
         client_2 = json.load(file)
         client_2_answers = [extract_answer(d['prediction']) for d in client_2]
 
@@ -64,5 +64,5 @@ if __name__ == "__main__":
         new_test.append(t)
 
 
-    with open(f"output_qwen_3_{args.client1}/checkpoint-{args.checkpoint}/pollen_test_round_{args.round}.jsonl" , encoding= "utf-8",mode="w") as file: 
+    with open(f"/workspace/output_qwen_4_{args.client1}/checkpoint-{args.checkpoint}/pollen_test_round_{args.round}.jsonl" , encoding= "utf-8",mode="w") as file: 
         for i in new_test: file.write(json.dumps(i) + "\n")
