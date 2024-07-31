@@ -34,7 +34,7 @@ if __name__ == "__main__":
         prev_test_path = "./pollen_classification/pollen_test.jsonl"
         prev_result_path = f"result.json"
     else:
-        prev_test_path = f"output_qwen_4_{args.client1}/checkpoint-{args.checkpoint}/pollen_test_round_{args.round - 1}.jsonl"
+        prev_test_path = f"./results/output_qwen_4_{args.client1}/checkpoint-{args.checkpoint}/pollen_test_round_{args.round - 1}.jsonl"
         prev_result_path = f"result_round_{args.round - 1}.json"
         
     with jsonlines.open(prev_test_path) as file:
