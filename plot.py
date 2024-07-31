@@ -75,10 +75,21 @@ rmse_3_0_round_3 = [3.523192192420367, 2.9848262685651297, 2.668990131420866, 3.
 rmse_4 = [4.2129, 3.7213, 2.8311, 2.4207, 2.6918, 2.5376, 2.2766, 2.4339, 2.0071, 2.3325, 2.1794, 1.9925, 2.2618, 2.1391, 2.0577]
 
 
+# Exp 4_0. Baseline pollen classification
+x_4_0 = [400 * i for i in range(1, 16)]
+acc_4_0 = [0.5121107266435986, 0.4273356401384083, 0.49653979238754326, 0.5397923875432526, 0.5224913494809689, 0.5103806228373703, 0.48961937716262977, 0.486159169550173, 0.47923875432525953, 0.5069204152249135, 0.48788927335640137, 0.48961937716262977, 0.48788927335640137, 0.4913494809688581, 0.4982698961937716]
+# horiz_line = [0.5 for i in range(15)]
+
+x_4_1 = [200 * i for i in range(1, 16)]
+acc_4_1_round_0 = [0.5 for i in range(15)]
+acc_4_1_round_1 = [0.5, 0.5, 0.5, 0.5155709342560554, 0.47750865051903113, 0.5051903114186851, 0.513840830449827, 0.49653979238754326, 0.5432525951557093, 0.5017301038062284, 0.5069204152249135, 0.4844290657439446, 0.5051903114186851, 0.47750865051903113, 0.4913494809688581]
+
 # Plot the data
-plt.plot(x_2_1, rmse_2_1, label='Baseline')
-plt.plot(x_3_1, rmse_3_2_round_0, label='Debate Round-0')
-plt.plot(x_3_1, rmse_4, label='Federated Learning')
+plt.plot(x_4_0, acc_4_0, label='Baseline')
+plt.plot(x_4_1, acc_4_1_round_0, label='Client-1 Round-0')
+plt.plot(x_4_1, acc_4_1_round_1, label='Client-1 Round-1') 
+# plt.plot(x_3_1, rmse_3_2_round_0, label='Debate Round-0')
+# plt.plot(x_3_1, rmse_4, label='Federated Learning')
 # plt.plot(x_3_1, rmse_3_0_round_1, label='Aggregated Round-1')
 # plt.plot(x_3_1, rmse_3_0_round_2, label='Aggregated Round-2')
 # plt.plot(x_3_1, rmse_3_0_round_3, label='Aggregated Round-3')
@@ -95,12 +106,12 @@ plt.plot(x_3_1, rmse_4, label='Federated Learning')
 
 # Add labels and title
 plt.xlabel('Step')
-plt.ylabel('RMSE')
-plt.title('Debate : RMSE')
+plt.ylabel('Accuracy ')
+plt.title('Baseline : Accuracy')
 
 # Add a legend
 plt.legend()
 
 # Show the plot
 plt.show()
-plt.savefig('result.png')
+plt.savefig('./LIFT/results/output_qwen_4_1/result.png')
