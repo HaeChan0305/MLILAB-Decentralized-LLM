@@ -27,13 +27,14 @@ def processing_text(tokenizer, messages):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test HF checkpoint.")
     parser.add_argument("-c", "--checkpoint-path", type=str, help="Checkpoint path")
+    parser.add_argument("-o", "--output-path", type=str)
     parser.add_argument("-b", "--batch-size", type=int, default=1)
     parser.add_argument("-r", "--round", type=int)
 
     args = parser.parse_args()
 
     test = []
-    with jsonlines.open(os.path.join(args.checkpoint_path, f"pollen_test_round_{args.round}.jsonl")) as file:
+    with jsonlines.open(os.path.join(args.output_path, f"pollen_test_round_{args.round}.jsonl")) as file:
         for line in file:
             test.append(line)
     test = [example["messages"] for example in test]
@@ -69,7 +70,7 @@ if __name__ == "__main__":
         
 
         if i != 0:
-            with open(os.path.join(args.checkpoint_path, f"result_round_{args.round}.json"), "r") as file:
+            with open(os.path.join(args.output_path, f"result_round_{args.round}.json"), "r") as file:
                 result = json.load(file)
         else:
             result = []
@@ -80,5 +81,5 @@ if __name__ == "__main__":
                     }
                    for j in range(len(predictions))]
             
-        with open(os.path.join(args.checkpoint_path, f"result_round_{args.round}.json"), "w") as file:
+        with open(os.path.join(args.output_path, f"result_round_{args.round}.json"), "w") as file:
             json.dump(result, file)
