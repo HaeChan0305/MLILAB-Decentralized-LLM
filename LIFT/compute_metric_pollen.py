@@ -29,14 +29,20 @@ def accuracy(targ, pred):
     return sum([1 if t == p else 0 for t, p in zip(targ, pred)]) / len(targ)
 
 def precision(targ, pred):
+    if sum([1 if p == 'P' else 0 for p in pred]) == 0:
+        return None
     return sum([1 if t == p and t == 'P' else 0 for t, p in zip(targ, pred)]) / sum([1 if p == 'P' else 0 for p in pred])
 
 def recall(targ, pred):
+    if sum([1 if t == 'P' else 0 for t in targ]) == 0:
+        return None
     return sum([1 if t == p and t == 'P' else 0 for t, p in zip(targ, pred)]) / sum([1 if t == 'P' else 0 for t in targ])
 
 def f1score(targ, pred):
     pr = precision(targ, pred)
     rc = recall(targ, pred)
+    if pr == None or rc == None:
+        return None
     return 1/(1/pr + 1/rc)
 
 def mae(t, p):
