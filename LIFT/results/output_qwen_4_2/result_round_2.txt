@@ -1,0 +1,89 @@
+
+========= ./results/output_qwen_4_2/checkpoint-200/result_round_2.json =========
+Accuracy :  0.5
+Precision :  None
+Recall :  0.0
+F1-score :  None
+
+========= ./results/output_qwen_4_2/checkpoint-400/result_round_2.json =========
+Accuracy :  0.5
+Precision :  None
+Recall :  0.0
+F1-score :  None
+
+========= ./results/output_qwen_4_2/checkpoint-600/result_round_2.json =========
+Accuracy :  0.5
+Precision :  None
+Recall :  0.0
+F1-score :  None
+
+========= ./results/output_qwen_4_2/checkpoint-800/result_round_2.json =========
+Accuracy :  0.5
+Precision :  None
+Recall :  0.0
+F1-score :  None
+
+========= ./results/output_qwen_4_2/checkpoint-1000/result_round_2.json =========
+Accuracy :  0.5
+Precision :  None
+Recall :  0.0
+F1-score :  None
+
+========= ./results/output_qwen_4_2/checkpoint-1200/result_round_2.json =========
+Accuracy :  0.5
+Precision :  None
+Recall :  0.0
+F1-score :  None
+
+========= ./results/output_qwen_4_2/checkpoint-1400/result_round_2.json =========
+Accuracy :  0.5
+Precision :  None
+Recall :  0.0
+F1-score :  None
+
+========= ./results/output_qwen_4_2/checkpoint-1600/result_round_2.json =========
+Accuracy :  0.5
+Precision :  None
+Recall :  0.0
+F1-score :  None
+
+========= ./results/output_qwen_4_2/checkpoint-1800/result_round_2.json =========
+Accuracy :  0.5
+Precision :  None
+Recall :  0.0
+F1-score :  None
+
+========= ./results/output_qwen_4_2/checkpoint-2000/result_round_2.json =========
+Accuracy :  0.4982698961937716
+Precision :  0.3333333333333333
+Recall :  0.0034602076124567475
+F1-score :  0.003424657534246575
+
+========= ./results/output_qwen_4_2/checkpoint-2200/result_round_2.json =========
+Accuracy :  0.5034602076124568
+Precision :  1.0
+Recall :  0.006920415224913495
+F1-score :  0.006872852233676976
+
+========= ./results/output_qwen_4_2/checkpoint-2400/result_round_2.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  0.010380622837370242
+F1-score :  0.010169491525423728
+
+========= ./results/output_qwen_4_2/checkpoint-2600/result_round_2.json =========
+Accuracy :  0.5
+Precision :  None
+Recall :  0.0
+F1-score :  None
+
+========= ./results/output_qwen_4_2/checkpoint-2800/result_round_2.json =========
+Accuracy :  0.5
+Precision :  None
+Recall :  0.0
+F1-score :  None
+
+========= ./results/output_qwen_4_2/checkpoint-3000/result_round_2.json =========
+Accuracy :  0.4982698961937716
+Precision :  0.0
+Recall :  0.0
