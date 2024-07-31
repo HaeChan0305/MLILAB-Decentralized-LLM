@@ -1,0 +1,90 @@
+
+========= ./results/output_qwen_4_1/checkpoint-200/result_round_1.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-400/result_round_1.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-600/result_round_1.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-800/result_round_1.json =========
+Accuracy :  0.5155709342560554
+Precision :  0.510158013544018
+Recall :  0.7820069204152249
+F1-score :  0.3087431693989071
+
+========= ./results/output_qwen_4_1/checkpoint-1000/result_round_1.json =========
+Accuracy :  0.47750865051903113
+Precision :  0.4847775175644028
+Recall :  0.7162629757785467
+F1-score :  0.2891061452513966
+
+========= ./results/output_qwen_4_1/checkpoint-1200/result_round_1.json =========
+Accuracy :  0.5051903114186851
+Precision :  0.5026269702276708
+Recall :  0.9930795847750865
+F1-score :  0.33372093023255817
+
+========= ./results/output_qwen_4_1/checkpoint-1400/result_round_1.json =========
+Accuracy :  0.513840830449827
+Precision :  0.5086206896551724
+Recall :  0.8166089965397924
+F1-score :  0.31341301460823373
+
+========= ./results/output_qwen_4_1/checkpoint-1600/result_round_1.json =========
+Accuracy :  0.49653979238754326
+Precision :  0.49777777777777776
+Recall :  0.7750865051903114
+F1-score :  0.3031123139377537
+
+========= ./results/output_qwen_4_1/checkpoint-1800/result_round_1.json =========
+Accuracy :  0.5432525951557093
+Precision :  0.5280898876404494
+Recall :  0.8131487889273357
+F1-score :  0.3201634877384196
+
+========= ./results/output_qwen_4_1/checkpoint-2000/result_round_1.json =========
+Accuracy :  0.5017301038062284
+Precision :  0.5011494252873563
+Recall :  0.754325259515571
+F1-score :  0.3011049723756906
+
+========= ./results/output_qwen_4_1/checkpoint-2200/result_round_1.json =========
+Accuracy :  0.5069204152249135
+Precision :  0.5048309178743962
+Recall :  0.7231833910034602
+F1-score :  0.2972972972972973
+
+========= ./results/output_qwen_4_1/checkpoint-2400/result_round_1.json =========
+Accuracy :  0.4844290657439446
+Precision :  0.4899328859060403
+Recall :  0.7577854671280276
+F1-score :  0.297554347826087
+
+========= ./results/output_qwen_4_1/checkpoint-2600/result_round_1.json =========
+Accuracy :  0.5051903114186851
+Precision :  0.5034324942791762
+Recall :  0.7612456747404844
+F1-score :  0.30303030303030304
+
+========= ./results/output_qwen_4_1/checkpoint-2800/result_round_1.json =========
+Accuracy :  0.47750865051903113
+Precision :  0.48402948402948404
+Recall :  0.6816608996539792
+F1-score :  0.28304597701149425
+
+========= ./results/output_qwen_4_1/checkpoint-3000/result_round_1.json =========
+Accuracy :  0.4913494809688581
+Precision :  0.4937655860349127
+Recall :  0.6851211072664359
+F1-score :  0.28695652173913044
