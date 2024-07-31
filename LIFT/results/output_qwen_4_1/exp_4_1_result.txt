@@ -1,0 +1,90 @@
+
+========= ./results/output_qwen_4_1/checkpoint-200/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-400/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-600/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-800/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-1000/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-1200/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-1400/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-1600/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-1800/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-2000/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-2200/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-2400/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-2600/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-2800/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
+
+========= ./results/output_qwen_4_1/checkpoint-3000/result.json =========
+Accuracy :  0.5
+Precision :  0.5
+Recall :  1.0
+F1-score :  0.3333333333333333
