@@ -24,7 +24,7 @@ def processing_text(tokenizer, messages):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test HF checkpoint.")
-    parser.add_argument("-c", "--checkpoint-path", type=str, help="Checkpoint path", default="Qwen/Qwen2-7B-Instruct")
+    parser.add_argument("-c", "--checkpoint-path", type=str, help="Checkpoint path", default="Qwen/Qwen2-1.5B-Instruct")
     # parser.add_argument("-f", "--sample-input-file", type=str, default=None)
     parser.add_argument("-o", "--sample-output-file", type=str)
     parser.add_argument("-b", "--batch-size", type=int, default=1)
@@ -55,7 +55,7 @@ if __name__ == "__main__":
             batch = test[B * i : ]
         
         texts = [processing_text(tokenizer, msg) for msg in batch]
-        # import pdb; pdb.set_trace()
+        
         model_inputs = tokenizer(texts, return_tensors="pt", padding=True).to(device)
         
         generated_ids = model.generate(
@@ -65,8 +65,8 @@ if __name__ == "__main__":
         generated_ids =[output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids,  generated_ids)]
 
         predictions = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
+        import pdb; pdb.set_trace()
         
-
         if i != 0:
             with open(os.path.join(args.sample_output_file), "r") as file:
                 result = json.load(file)

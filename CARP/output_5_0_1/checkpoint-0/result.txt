@@ -1,0 +1,12 @@
+
+========= ./output_5_0_1/checkpoint-0/agnews_result.json =========
+Accuracy :  0.7381578947368421
+
+========= ./output_5_0_1/checkpoint-0/mr_result.json =========
+Accuracy :  0.8375
+
+========= ./output_5_0_1/checkpoint-0/r8_result.json =========
+Accuracy :  0.2804933759707629
+
+========= ./output_5_0_1/checkpoint-0/sst2_result.json =========
+Accuracy :  0.8692660550458715
