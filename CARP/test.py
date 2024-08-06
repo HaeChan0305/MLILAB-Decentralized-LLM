@@ -13,23 +13,126 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 
 # A prompt for agnews with CARP
-CARP_PROMPT_1 = """First, list CLUES (i.e., keywords, phrases, contextual information, semantic relations, semantic meaning, tones, references) that support the sentiment determination of input.
-Second, deduce the diagnostic REASONING process from premises (i.e., clues, input) that supports the INPUT sentiment determination (Limit the number of words to 130).
-Third, based on clues, reasoning and input, determine the overall TOPIC of the INPUT sentence as either Sports, World, Science/Technology, or Business
-INPUT : {0}"""
+CARP_PROMPT_1 = """Classify the topic of the input sentence as (1) Sports, (2) World, (3) Science/Technology, or (4) Business.
+First, list CLUES (i.e., keywords, phrases, contextual information, semantic relations, semantic meaning, tones, references) that support to classify topic of input.
+Second, deduce the diagnostic REASONING process from premises (i.e., clues, input) that supports to determine the topic of the INPUT (Limit the number of words to 130).
+Third, based on clues, reasoning, and input, determine the overall TOPIC of the INPUT as either : 
+    
+    (1) Sports
+    (2) World
+    (3) Science/Technology
+    (4) Business
+
+The OUTPUT should follow the below JSON format :
+
+{{
+    "CLUES" : List of words,
+    "REASONING" : String,
+    "TOPIC" : Int (Only 1, 2, 3 and 4 are possible)
+}}
+
+INPUT : {0}
+OUTPUT :"""
 
 # A prompt for MR and SST2 with CARP
-CARP_PROMPT_2 = """First, list CLUES (i.e., keywords, phrases, contextual information, semantic relations, semantic meaning, tones, references) that support to classify sentiment of input.
+CARP_PROMPT_2 = """Classify the sentiment of the input sentence as (1) Positive or (2) Negative.
+First, list CLUES (i.e., keywords, phrases, contextual information, semantic relations, semantic meaning, tones, references) that support to classify sentiment of input.
 Second, deduce the diagnostic REASONING process from premises (i.e., clues, input) that supports to determine the sentiment of the INPUT (Limit the number of words to 130).
-Third, based on clues, reasoning, and input, determine the overall SENTIMENT of the INPUT as either Positive or Negative. Make sure that the SENTIMENT can only be either Positive or Negative.
+Third, based on clues, reasoning, and input, determine the overall SENTIMENT of the INPUT as either :
+    
+    (1) Positive
+    (2) Negative
 
-INPUT : {0}"""
+The OUTPUT should follow the below JSON format :
+
+{{
+    "CLUES" : List of words,
+    "REASONING" : String,
+    "SENTIMENT" : Int (Only 1 and 2 are possible)
+}}
+
+INPUT : {0}
+OUTPUT :"""
 
 # A prompt for r8 with CARP
-CARP_PROMPT_3 = """First, list CLUES (i.e., keywords, phrases, contextual information, semantic relations, semantic meaning, tones, references) that support the sentiment determination of input.
-Second, deduce the diagnostic REASONING process from premises (i.e., clues, input) that supports the INPUT sentiment determination (Limit the number of words to 130).
-Third, based on clues, reasoning and input, determine the overall TOPIC of the INPUT sentence as either Grain, Earnings and Earnings Forecasts, Interest Rates, Money/Foreign Exchange, Acquisitions, Crude Oil, Shipping, or Trade
-INPUT : {0}"""
+CARP_PROMPT_3 = """Classify the topic of the input sentence as (1) Grain, (2) Earnings and Earnings Forecasts, (3) Interest Rates, (4) Money/Foreign Exchange, (5) Acquisitions, (6) Crude Oil, (7) Shipping, or (8) Trade.
+First, list CLUES (i.e., keywords, phrases, contextual information, semantic relations, semantic meaning, tones, references) that support to classify topic of input.
+Second, deduce the diagnostic REASONING process from premises (i.e., clues, input) that supports to determine the topic of the INPUT (Limit the number of words to 130).
+Third, based on clues, reasoning, and input, determine the overall TOPIC of the INPUT as either :
+    
+    (1) Grain
+    (2) Earnings and Earnings Forecasts
+    (3) Interest Rates
+    (4) Money/Foreign Exchange
+    (5) Acquisitions
+    (6) Crude Oil
+    (7) Shipping
+    (8) Trade
+
+The OUTPUT should follow the below JSON format :
+
+{{
+    "CLUES" : List of words,
+    "REASONING" : String,
+    "TOPIC" : Int (Only 1, 2, 3, 4, 5, 6, 7 and 8 are possible)
+}}
+
+INPUT : {0}
+OUTPUT :"""
+
+# A prompt for agnews with CARP
+PROMPT_1 = """Classify the topic of the input sentence as :
+    
+    (1) Sports
+    (2) World
+    (3) Science/Technology
+    (4) Business
+
+The OUTPUT should follow the below JSON format :
+
+{{
+    "TOPIC" : Int (Only 1, 2, 3 and 4 are possible)
+}}
+
+INPUT : {0}
+OUTPUT :"""
+
+
+# A prompt for MR and SST2 with CARP
+PROMPT_2 = """Classify the sentiment of the input sentence as :
+    
+    (1) Positive
+    (2) Negative
+
+The OUTPUT should follow the below JSON format :
+
+{{
+    "SENTIMENT" : Int (Only 1 and 2 are possible)
+}}
+
+INPUT : {0}
+OUTPUT :"""
+
+# A prompt for r8 with CARP
+PROMPT_3 = """Classify the topic of the input sentence as :
+    
+    (1) Grain
+    (2) Earnings and Earnings Forecasts
+    (3) Interest Rates
+    (4) Money/Foreign Exchange
+    (5) Acquisitions
+    (6) Crude Oil
+    (7) Shipping
+    (8) Trade
+
+The OUTPUT should follow the below JSON format :
+
+{{
+    "TOPIC" : Int (Only 1, 2, 3, 4, 5, 6, 7 and 8 are possible)
+}}
+
+INPUT : {0}
+OUTPUT :"""
 
 
 def processing_text(tokenizer, prompt):
@@ -71,10 +174,10 @@ if __name__ == "__main__":
         elif args.dataset == 'sst2': prompt = CARP_PROMPT_2
         else: assert 0        
     else:
-        if args.dataset == 'agnews': prompt = "Please classify the overall TOPIC of the INPUT sentence as either Sports, World, Science/Technology, or Business\nINPUT : {0}\nTOPIC : "
-        elif args.dataset == 'mr': prompt = "Classify the overall SENTIMENT of the INPUT as Positive or Negative.\nINPUT : {0}\nSENTIMENT : "
-        elif args.dataset == 'r8': prompt = """Please classify the overall TOPIC of the INPUT sentence as either Grain, Earnings and Earnings Forecasts, Interest Rates, Money/Foreign Exchange, Acquisitions, Crude Oil, Shipping, or Trade\nINPUT : {0}\nTOPIC : """
-        elif args.dataset == 'sst2': prompt = "Classify the overall SENTIMENT of the INPUT as Positive or Negative.\nINPUT : {0}\nSENTIMENT : "
+        if args.dataset == 'agnews': prompt = PROMPT_1
+        elif args.dataset == 'mr': prompt = PROMPT_2
+        elif args.dataset == 'r8': prompt = PROMPT_3
+        elif args.dataset == 'sst2': prompt = PROMPT_2
         else: assert 0
             
     # import pdb; pdb.set_trace()

@@ -4,7 +4,6 @@ import json
 import argparse
 import numpy as np
 
-ANS_RE = re.compile(r"#### (\-?[0-9\.\,]+)")
 INVALID_ANS = "[invalid]"
 
 def check_result_length(data, dataset_name):
@@ -15,69 +14,49 @@ def check_result_length(data, dataset_name):
         "sst2" : 872
     }
     
-    if dataset_name in truth_table.keys():
-        if len(data) != truth_table[dataset_name]:
-            print(f"{dataset_name} length is {len(data)}. It should be {truth_table[dataset_name]}.")
-            return False
-        else:
-            return True
-    
-    else:
-        print("Unknown dataset", dataset_name)
+    if len(data) != truth_table[dataset_name]:
+        print(f"{dataset_name} length is {len(data)}. It should be {truth_table[dataset_name]}.")
         return False
-
-def harsh_extract_answer(dataset_name, completion):
-    pattern_table = {
-        "agnews" : r'\bTopic\b\s*:\s*(Sports|World|Science/Technology|Business)\b',
-        "mr" : r'\bSentiment\b\s*:\s*(Positive|Negative)\b',
-        "r8" : r'\bTopic\b\s*:\s*(Grain|Earnings and Earnings Forecasts|Interest Rates|Money/Foreign Exchange|Acquisitions|Crude Oil|Shipping|Trade)\b',
-        "sst2" : r'\bSentiment\b\s*:\s*(Positive|Negative)\b',
-    }
-
-    pattern = pattern_table[dataset_name]
-    matches = re.findall(pattern, completion, re.IGNORECASE)
-    if len(matches) == 0:
-        return INVALID_ANS
     else:
-        return matches[-1]
-    
-def naive_extract_answer(dataset_name, completion):
-    pattern_table = {
+        return True
+
+def extract_answer(dataset_name, completion):
+    choices = {
         "agnews" : ["Sports", "World", "Science/Technology", "Business"],
         "mr" : ["Positive", "Negative"],
         "r8" : ["Grain", "Earnings and Earnings Forecasts", "Interest Rates", "Money/Foreign Exchange", "Acquisitions", "Crude Oil", "Shipping", "Trade"],
         "sst2" : ["Positive", "Negative"],
     }
+    
+    keywords = {
+        "agnews" : "TOPIC",
+        "mr" : "SENTIMENT",
+        "r8" : "TOPIC",
+        "sst2" : "SENTIMENT",
+    }
+    
+    try:
+        json_object = json.loads(completion)
+    except Exception as e:
+        return INVALID_ANS + "0"
+    
+    if json_object.keys() != set(['CLUES', 'REASONING', keywords[dataset_name]]):
+        return INVALID_ANS + "1"
+    if type(json_object['CLUES']) != list:
+        return INVALID_ANS + "2"
+    if len(json_object['CLUES']) > 0 and type(json_object['CLUES'][0]) != str:
+        return INVALID_ANS + "3"
+    if type(json_object['REASONING']) != str:
+        return INVALID_ANS + "4"
+    if type(json_object[keywords[dataset_name]]) != str:
+        return INVALID_ANS + "5"
+    if json_object[keywords[dataset_name]].lower() not in [c.lower() for c in choices[dataset_name]]:
+        return INVALID_ANS + "6"
+    return json_object[keywords[dataset_name]]
 
-    pattern = pattern_table[dataset_name]
-    matches = []
-    for word in pattern:
-        if word.lower() in completion.lower():
-            matches.append(word)
-
-    if len(matches) == 1:
-        return matches[-1]
-    else:
-        return INVALID_ANS + str(len(matches))
-
-
-def extract_answer(dataset_name, completion):
-    answer = harsh_extract_answer(dataset_name, completion)
-    if answer != INVALID_ANS:
-        return answer
-    return naive_extract_answer(dataset_name, completion)
 
 def is_correct(t, p):
     return t.lower() == p.lower()
-
-def count_invalid(pred):
-    return sum([1 if p == INVALID_ANS else 0 for p in pred]) / len(pred)
-
-def count_invalid_0(pred):
-    return sum([1 if p == INVALID_ANS + "0" else 0 for p in pred]) / len(pred)
-
-def count_invalid_2(pred):
-    return sum([1 if p == INVALID_ANS + "2" else 0 for p in pred]) / len(pred)
 
 def accuracy(targ, pred):
     return sum([1 if is_correct(t, p) else 0 for t, p in zip(targ, pred)]) / len(targ)
@@ -118,13 +97,29 @@ if __name__ == "__main__":
     answers = [example['answer'] for example in data]
     predictions = [extract_answer(args.dataset_name, example['prediction']) for example in data]
     
-    new_answers = np.array(answers)
-    new_predictions = np.array(predictions)
+    print("Accuracy : ", accuracy(answers, predictions))
     
-    print("Accuracy : ", accuracy(new_answers, new_predictions))
-    print("Number of INVALID ANSWER : ", count_invalid(new_predictions))
-    print("Number of INVALID-0 ANSWER : ", count_invalid_0(new_predictions))
-    print("Number of INVALID-2 ANSWER : ", count_invalid_2(new_predictions))
-    # print("Precision : ", precision(new_answers, new_predictions))
-    # print("Recall : ", recall(new_answers, new_predictions))
-    # print("F1-score : ", f1score(new_answers, new_predictions))
+    print("Number of Total    :", len(predictions))
+    print("Number of Correct  :", sum([1 for t, p in zip(answers, predictions) if is_correct(t, p)]))
+    print("Number of Wrong    :", sum([1 for t, p in zip(answers, predictions) if INVALID_ANS not in p and not is_correct(t, p)]))
+    print("Number of INVALID 0:", sum([1 for p in predictions if p == INVALID_ANS + "0"]))
+    print("Number of INVALID 1:", sum([1 for p in predictions if p == INVALID_ANS + "1"]))
+    print("Number of INVALID 2:", sum([1 for p in predictions if p == INVALID_ANS + "2"]))
+    print("Number of INVALID 3:", sum([1 for p in predictions if p == INVALID_ANS + "3"]))
+    print("Number of INVALID 4:", sum([1 for p in predictions if p == INVALID_ANS + "4"]))
+    print("Number of INVALID 5:", sum([1 for p in predictions if p == INVALID_ANS + "5"]))
+    print("Number of INVALID 6:", sum([1 for p in predictions if p == INVALID_ANS + "6"]))
+    print("===========================================")
+    
+    
+    
+    wrong_list = [
+        {"answer" : t, "prediction" : p} 
+        for t, p in zip(answers, predictions) if INVALID_ANS not in p and not is_correct(t, p)
+    ]
+    
+    invalid_6_list = [example['prediction'] for example, p in zip(data, predictions) if p == INVALID_ANS + "6"]
+    # for a in invalid_6_list:
+    #     print(a)
+    
+    # import pdb; pdb.set_trace()
