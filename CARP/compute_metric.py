@@ -58,18 +58,10 @@ def extract_answer_carp(dataset_name, completion):
             if i == 1:
                 return INVALID_ANS + "0"
             
-            new_completion = None
-            for choice in CHOICES[dataset_name]:
-                if choice in completion:
-                    splits = completion.split(choice)
-                    new_completion = splits[0] + '"' + choice + '"' + splits[1]
-                    # import pdb; pdb.set_trace()
-                    break
-
-            if new_completion == None:
+            completion = reconstruct(completion)
+            if completion == None:
                 return INVALID_ANS + "0"
-            else:
-                completion = new_completion
+
 
 def extract_answer_no_carp(dataset_name, completion):
     for i in range(2):

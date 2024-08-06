@@ -1,6 +1,8 @@
 import json
 import pdb
 
+# example = '{\n    "CLUES" : ["Symantec", "Veritas "Software" Corp.", "buy", "\\$13.5 billion", "security software", "backup and recovery software", "expand", "New York",],\n    "REASONING" : "The input mentions the acquisition of Symantec by Veritas Software Corp. in the context of expanding their respective markets.",\n    "TOPIC" : "Business"\n}'
+
 BAD_TOKENS = ['"', '\\']
 
 PATTERN_0 = '{\n    "CLUES" : ' 
@@ -52,6 +54,18 @@ def _extract_answer(s, mode):
 
     return answer
 
+def _modify_clues(clues):
+    clues = clues[1:-1]
+    if clues[-1] == ',':
+        clues = clues[:-1]
+    
+    clues = clues.split('", "')
+    for t in BAD_TOKENS:
+        clues = [clue.replace(t, '') for clue in clues]
+    
+    return '["' + '", "'.join(clues) + '"]'
+    
+
 def _modify_reasoning(reasoning):
     reasoning = reasoning[1:-1]
     for t in BAD_TOKENS:
@@ -66,8 +80,15 @@ def reconstruct(s):
         return None
     
     clues = _extract_clues(s, mode)
+    clues = _modify_clues(clues)
+    
     reasoning = _extract_reasoning(s, mode)
     reasoning = _modify_reasoning(reasoning)
+    
     answer = _extract_answer(s, mode)
     
     return  PATTERN_0 + clues + PATTERN_1 + reasoning + mode + answer + PATTERN_4
+
+
+# print(example)
+# print(reconstruct(example))
