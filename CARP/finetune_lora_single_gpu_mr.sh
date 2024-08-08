@@ -42,8 +42,8 @@ python finetune.py \
   --data_path $DATA \
   --do_train True \
   --bf16 True \
-  --output_dir ./ft_model_5_0_1/${DATASETNAME} \
-  --num_train_epochs 10 \
+  --output_dir ./ft_model_test/${DATASETNAME} \
+  --num_train_epochs 3 \
   --per_device_train_batch_size 8 \
   --gradient_accumulation_steps 4 \
   --save_strategy "steps" \

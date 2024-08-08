@@ -3,3 +3,5 @@ docs/_build/
 docs/build/
 docs/**/*.mo
 LIFT/output_*
+ft_model_5_0_1/
+ft_model_test/

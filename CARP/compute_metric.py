@@ -93,6 +93,19 @@ def extract_answer_no_carp(dataset_name, completion):
             else:
                 completion = new_completion
         
+def extract_answer_base(dataset_name, completion):
+    ret = None
+    for choice in CHOICES[dataset_name]:
+        if choice in completion:
+            if ret == None:
+                ret = choice
+            else:
+                return INVALID_ANS + "0"
+    
+    if ret == None:
+        return INVALID_ANS + "1"
+    else:
+        return ret
 
 def is_correct(t, p):
     return t.lower() == p.lower()
@@ -134,7 +147,7 @@ if __name__ == "__main__":
     parser.add_argument("-e", "--use-carp", type=str2bool)
     args = parser.parse_args()
     
-    print(f"\n========= {args.result_path} =========")
+    print(f"\n======== {args.result_path} ========")
     
     if not os.path.exists(args.result_path):
         print("There is no file")
@@ -146,7 +159,8 @@ if __name__ == "__main__":
         
     extract_answer = extract_answer_carp if args.use_carp else extract_answer_no_carp
     answers = [example['answer'] for example in data]
-    predictions = [extract_answer(args.dataset_name, example['prediction']) for example in data]
+    # predictions = [extract_answer(args.dataset_name, example['prediction']) for example in data]
+    predictions = [extract_answer_base(args.dataset_name, example['prediction']) for example in data] # JSON format 깨졌을 때 사용
     
     print("Accuracy : ", accuracy(answers, predictions))
     
@@ -163,7 +177,7 @@ if __name__ == "__main__":
     #     for t, p in zip(answers, predictions) if INVALID_ANS not in p and not is_correct(t, p)
     # ]
     
-    # invalid_list = [example['prediction'] for example, p in zip(data, predictions) if p == INVALID_ANS + "0"]
+    # invalid_list = [example['prediction'] for example, p in zip(data, predictions) if p == INVALID_ANS + "1"]
     # for a in invalid_list:
     #     print(a)
     

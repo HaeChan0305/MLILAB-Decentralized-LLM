@@ -150,17 +150,27 @@ def preprocess(
 
     texts = []
     for i, msg in enumerate(messages):
+        # texts.append(
+        #     tokenizer.apply_chat_template(
+        #         msg,
+        #         chat_template=TEMPLATE,
+        #         tokenize=True,
+        #         add_generation_prompt=False,
+        #         padding="max_length",
+        #         max_length=max_len,
+        #         truncation=True,
+        #     )
+        # )
+        msg = ' '.join([m['content'] for m in msg if m['role'] != 'system']) # My own code
         texts.append(
-            tokenizer.apply_chat_template(
+            tokenizer(
                 msg,
-                chat_template=TEMPLATE,
-                tokenize=True,
-                add_generation_prompt=False,
                 padding="max_length",
                 max_length=max_len,
                 truncation=True,
-            )
+            )['input_ids']
         )
+    # import pdb; pdb.set_trace()
     input_ids = torch.tensor(texts, dtype=torch.int)
     target_ids = input_ids.clone()
     target_ids[target_ids == tokenizer.pad_token_id] = IGNORE_TOKEN_ID
