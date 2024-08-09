@@ -144,7 +144,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test HF checkpoint.")
     parser.add_argument("-r", "--result-path", type=str, help="Checkpoint path")
     parser.add_argument("-d", "--dataset-name", type=str, choices=['agnews', 'mr', 'r8', 'sst2'])
-    parser.add_argument("-e", "--use-carp", type=str2bool)
+    # parser.add_argument("-e", "--use-carp", type=str2bool)
     args = parser.parse_args()
     
     print(f"\n======== {args.result_path} ========")
@@ -157,18 +157,25 @@ if __name__ == "__main__":
         
     assert check_result_length(data, args.dataset_name)
         
-    extract_answer = extract_answer_carp if args.use_carp else extract_answer_no_carp
+    
     answers = [example['answer'] for example in data]
+    # # exp_5_0_1 / exp_5_0_2
+    # extract_answer = extract_answer_carp if args.use_carp else extract_answer_no_carp
     # predictions = [extract_answer(args.dataset_name, example['prediction']) for example in data]
-    predictions = [extract_answer_base(args.dataset_name, example['prediction']) for example in data] # JSON format 깨졌을 때 사용
+    
+    # # JSON format 깨졌을 때 사용
+    # predictions = [extract_answer_base(args.dataset_name, example['prediction']) for example in data] 
+    
+    # exp_5_0_3
+    predictions = [example['prediction'] for example in data] 
     
     print("Accuracy : ", accuracy(answers, predictions))
     
-    print("Number of Total    :", len(predictions))
-    print("Number of Correct  :", sum([1 for t, p in zip(answers, predictions) if is_correct(t, p)]))
-    print("Number of Wrong    :", sum([1 for t, p in zip(answers, predictions) if INVALID_ANS not in p and not is_correct(t, p)]))
-    print("Number of INVALID 0:", sum([1 for p in predictions if p == INVALID_ANS + "0"]))
-    print("Number of INVALID 1:", sum([1 for p in predictions if p == INVALID_ANS + "1"]))
+    # print("Number of Total    :", len(predictions))
+    # print("Number of Correct  :", sum([1 for t, p in zip(answers, predictions) if is_correct(t, p)]))
+    # print("Number of Wrong    :", sum([1 for t, p in zip(answers, predictions) if INVALID_ANS not in p and not is_correct(t, p)]))
+    # print("Number of INVALID 0:", sum([1 for p in predictions if p == INVALID_ANS + "0"]))
+    # print("Number of INVALID 1:", sum([1 for p in predictions if p == INVALID_ANS + "1"]))
     
     
     

@@ -1,0 +1,87 @@
+========= ./output_5_0_2/checkpoint-0/mr_result.json =========
+Accuracy :  0.800625
+Number of Total    : 1600
+Number of Correct  : 1281
+Number of Wrong    : 273
+Number of INVALID 0: 4
+Number of INVALID 1: 42
+
+======== ./output_5_0_2/mr/checkpoint-283/mr_result.json ========
+Accuracy :  0.8425
+Number of Total    : 1600
+Number of Correct  : 1348
+Number of Wrong    : 252
+Number of INVALID 0: 0
+Number of INVALID 1: 0
+
+======== ./output_5_0_2/mr/checkpoint-566/mr_result.json ========
+Accuracy :  0.804375
+Number of Total    : 1600
+Number of Correct  : 1287
+Number of Wrong    : 313
+Number of INVALID 0: 0
+Number of INVALID 1: 0
+
+======== ./output_5_0_2/mr/checkpoint-849/mr_result.json ========
+Accuracy :  0.8375
+Number of Total    : 1600
+Number of Correct  : 1340
+Number of Wrong    : 260
+Number of INVALID 0: 0
+Number of INVALID 1: 0
+
+======== ./output_5_0_2/mr/checkpoint-1132/mr_result.json ========
+Accuracy :  0.85625
+Number of Total    : 1600
+Number of Correct  : 1370
+Number of Wrong    : 230
+Number of INVALID 0: 0
+Number of INVALID 1: 0
+
+======== ./output_5_0_2/mr/checkpoint-1415/mr_result.json ========
+Accuracy :  0.88625
+Number of Total    : 1600
+Number of Correct  : 1418
+Number of Wrong    : 182
+Number of INVALID 0: 0
+Number of INVALID 1: 0
+
+======== ./output_5_0_2/mr/checkpoint-1698/mr_result.json ========
+Accuracy :  0.88875
+Number of Total    : 1600
+Number of Correct  : 1422
+Number of Wrong    : 178
+Number of INVALID 0: 0
+Number of INVALID 1: 0
+
+======== ./output_5_0_2/mr/checkpoint-1981/mr_result.json ========
+Accuracy :  0.878125
+Number of Total    : 1600
+Number of Correct  : 1405
+Number of Wrong    : 195
+Number of INVALID 0: 0
+Number of INVALID 1: 0
+
+======== ./output_5_0_2/mr/checkpoint-2264/mr_result.json ========
+Accuracy :  0.883125
+Number of Total    : 1600
+Number of Correct  : 1413
+Number of Wrong    : 187
+Number of INVALID 0: 0
+Number of INVALID 1: 0
+
+======== ./output_5_0_2/mr/checkpoint-2547/mr_result.json ========
+Accuracy :  0.884375
+Number of Total    : 1600
+Number of Correct  : 1415
+Number of Wrong    : 185
+Number of INVALID 0: 0
+Number of INVALID 1: 0
+
+======== ./output_5_0_2/mr/checkpoint-2830/mr_result.json ========
+Accuracy :  0.88
+Number of Total    : 1600
+Number of Correct  : 1408
+Number of Wrong    : 192
+Number of INVALID 0: 0
+Number of INVALID 1: 0

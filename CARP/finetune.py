@@ -150,25 +150,16 @@ def preprocess(
 
     texts = []
     for i, msg in enumerate(messages):
-        # texts.append(
-        #     tokenizer.apply_chat_template(
-        #         msg,
-        #         chat_template=TEMPLATE,
-        #         tokenize=True,
-        #         add_generation_prompt=False,
-        #         padding="max_length",
-        #         max_length=max_len,
-        #         truncation=True,
-        #     )
-        # )
-        msg = ' '.join([m['content'] for m in msg if m['role'] != 'system']) # My own code
         texts.append(
-            tokenizer(
+            tokenizer.apply_chat_template(
                 msg,
+                chat_template=TEMPLATE,
+                tokenize=True,
+                add_generation_prompt=False,
                 padding="max_length",
                 max_length=max_len,
                 truncation=True,
-            )['input_ids']
+            )
         )
     # import pdb; pdb.set_trace()
     input_ids = torch.tensor(texts, dtype=torch.int)
@@ -373,7 +364,6 @@ def train():
         model=model, tokenizer=tokenizer, args=training_args, **data_module
     )
 
-    # import pdb; pdb.set_trace()
     # `not training_args.use_lora` is a temporary workaround for the issue that there are problems with
     # loading the checkpoint when using LoRA with DeepSpeed.
     # Check this issue https://github.com/huggingface/peft/issues/746 for more information.

@@ -1,0 +1,87 @@
+========= ./output_5_0_2/checkpoint-0/r8_result.json =========
+Accuracy :  0.4819552306989493
+Number of Total    : 2189
+Number of Correct  : 1055
+Number of Wrong    : 706
+Number of INVALID 0: 168
+Number of INVALID 1: 260
+
+======== ./output_5_0_2/r8/checkpoint-171/r8_result.json ========
+Accuracy :  0.5381452718136135
+Number of Total    : 2189
+Number of Correct  : 1178
+Number of Wrong    : 154
+Number of INVALID 0: 86
+Number of INVALID 1: 771
+
+======== ./output_5_0_2/r8/checkpoint-342/r8_result.json ========
+Accuracy :  0.6601187756966651
+Number of Total    : 2189
+Number of Correct  : 1445
+Number of Wrong    : 408
+Number of INVALID 0: 52
+Number of INVALID 1: 284
+
+======== ./output_5_0_2/r8/checkpoint-513/r8_result.json ========
+Accuracy :  0.3759707629054363
+Number of Total    : 2189
+Number of Correct  : 823
+Number of Wrong    : 1128
+Number of INVALID 0: 15
+Number of INVALID 1: 223
+
+======== ./output_5_0_2/r8/checkpoint-684/r8_result.json ========
+Accuracy :  0.3750571037003198
+Number of Total    : 2189
+Number of Correct  : 821
+Number of Wrong    : 1313
+Number of INVALID 0: 6
+Number of INVALID 1: 49
+
+======== ./output_5_0_2/r8/checkpoint-855/r8_result.json ========
+Accuracy :  0.37962539972590226
+Number of Total    : 2189
+Number of Correct  : 831
+Number of Wrong    : 1325
+Number of INVALID 0: 1
+Number of INVALID 1: 32
+
+======== ./output_5_0_2/r8/checkpoint-1026/r8_result.json ========
+Accuracy :  0.4399269072635907
+Number of Total    : 2189
+Number of Correct  : 963
+Number of Wrong    : 1214
+Number of INVALID 0: 2
+Number of INVALID 1: 10
+
+======== ./output_5_0_2/r8/checkpoint-1197/r8_result.json ========
+Accuracy :  0.4298766560073093
+Number of Total    : 2189
+Number of Correct  : 941
+Number of Wrong    : 1237
+Number of INVALID 0: 0
+Number of INVALID 1: 11
+
+======== ./output_5_0_2/r8/checkpoint-1368/r8_result.json ========
+Accuracy :  0.4490634993147556
+Number of Total    : 2189
+Number of Correct  : 983
+Number of Wrong    : 1204
+Number of INVALID 0: 0
+Number of INVALID 1: 2
+
+======== ./output_5_0_2/r8/checkpoint-1539/r8_result.json ========
+Accuracy :  0.45271813613522155
+Number of Total    : 2189
+Number of Correct  : 991
+Number of Wrong    : 1196
+Number of INVALID 0: 0
+Number of INVALID 1: 2
+
+======== ./output_5_0_2/r8/checkpoint-1710/r8_result.json ========
+Accuracy :  0.4499771585198721
+Number of Total    : 2189
+Number of Correct  : 985
+Number of Wrong    : 1200
+Number of INVALID 0: 0
+Number of INVALID 1: 4

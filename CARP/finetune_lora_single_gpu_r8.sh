@@ -5,7 +5,7 @@ MODEL="Qwen/Qwen2-1.5B-Instruct" # Set the path if you do not want to load from 
 # ATTENTION: specify the path to your training data, which should be a json file consisting of a list of conversations.
 # See the section for finetuning in README for more information.
 DATASETNAME="r8"
-DATA="./data/${DATASETNAME}_train.jsonl"
+DATA="./data/${DATASETNAME}_train_1.jsonl"
 
 function usage() {
     echo '
@@ -42,8 +42,8 @@ python finetune.py \
   --data_path $DATA \
   --do_train True \
   --bf16 True \
-  --output_dir ./ft_model_test/${DATASETNAME} \
-  --num_train_epochs 3 \
+  --output_dir ./ft_model_5_0_3/${DATASETNAME} \
+  --num_train_epochs 10 \
   --per_device_train_batch_size 8 \
   --gradient_accumulation_steps 4 \
   --save_strategy "steps" \

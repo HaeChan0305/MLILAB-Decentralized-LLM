@@ -100,13 +100,22 @@ The OUTPUT should follow the below JSON format :
 INPUT : {0}
 OUTPUT :"""
 
+# # For exp 5-0-1 / exp 5-0-2
+# def processing_text(tokenizer, prompt):
+#     messages = [
+#         {"role": "system", "content": "You are a helpful assistant."},
+#         {"role": "user", "content": prompt}
+#     ]
 
-def processing_text(tokenizer, prompt):
-    messages = [
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": prompt}
-    ]
+#     return tokenizer.apply_chat_template(
+#         messages,
+#         tokenize=False,
+#         add_generation_prompt=True
+#     )
 
+# For exp 5-0-3
+def processing_text(tokenizer, messages):
+    assert 'assistant' not in [m['role'] for m in messages]
     return tokenizer.apply_chat_template(
         messages,
         tokenize=False,
@@ -129,25 +138,30 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--dataset", type=str, choices=['agnews', 'mr', 'r8', 'sst2'])
     parser.add_argument("-o", "--sample-output-file", type=str)
     parser.add_argument("-b", "--batch-size", type=int, default=1)
-    parser.add_argument("-e", "--use-carp", type=str2bool)
+    # parser.add_argument("-e", "--use-carp", type=str2bool)
 
     args = parser.parse_args()
     
-    if args.use_carp == True:
-        if args.dataset == 'agnews': prompt = CARP_PROMPT_1
-        elif args.dataset == 'mr': prompt = CARP_PROMPT_2
-        elif args.dataset == 'r8': prompt = CARP_PROMPT_3
-        elif args.dataset == 'sst2': prompt = CARP_PROMPT_2
-        else: assert 0        
-    else:
-        if args.dataset == 'agnews': prompt = PROMPT_1
-        elif args.dataset == 'mr': prompt = PROMPT_2
-        elif args.dataset == 'r8': prompt = PROMPT_3
-        elif args.dataset == 'sst2': prompt = PROMPT_2
-        else: assert 0
+    # if args.use_carp == True:
+    #     if args.dataset == 'agnews': prompt = CARP_PROMPT_1
+    #     elif args.dataset == 'mr': prompt = CARP_PROMPT_2
+    #     elif args.dataset == 'r8': prompt = CARP_PROMPT_3
+    #     elif args.dataset == 'sst2': prompt = CARP_PROMPT_2
+    #     else: assert 0        
+    # else:
+    #     if args.dataset == 'agnews': prompt = PROMPT_1
+    #     elif args.dataset == 'mr': prompt = PROMPT_2
+    #     elif args.dataset == 'r8': prompt = PROMPT_3
+    #     elif args.dataset == 'sst2': prompt = PROMPT_2
+    #     else: assert 0
             
     # import pdb; pdb.set_trace()
-    test = pd.read_csv(f"./data/{args.dataset}_test.csv")
+    # test = pd.read_csv(f"./data/{args.dataset}_test.csv")
+    test = []
+    with jsonlines.open(f"./data/{args.dataset}_test.jsonl") as file:
+        for line in file:
+            test.append(line)
+    test = [example["messages"] for example in test]
 
     device = "cuda" # the device to load the model onto
 
@@ -166,8 +180,7 @@ if __name__ == "__main__":
         else:
             batch = test[B * i : ]
         
-        batch = batch.reset_index()
-        texts = [processing_text(tokenizer, prompt.format(row['sentence'])) for _, row in batch.iterrows()]
+        texts = [processing_text(tokenizer, msg[:-1]) for msg in batch]
         model_inputs = tokenizer(texts, return_tensors="pt", padding=True).to(device)
         
         generated_ids = model.generate(
@@ -187,11 +200,10 @@ if __name__ == "__main__":
         # import pdb; pdb.set_trace()
         result += [{
                     'prompt': texts[j],
-                    'sentence': batch['sentence'][j],
-                    'answer': batch['label'][j],
+                    'answer': batch[j][2]['content'],
                     'prediction': predictions[j]
                    }
                    for j in range(len(predictions))]
-            
+        
         with open(os.path.join(args.sample_output_file), "w") as file:
             json.dump(result, file)
