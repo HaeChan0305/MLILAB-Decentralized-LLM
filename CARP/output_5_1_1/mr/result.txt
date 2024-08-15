@@ -1,0 +1,32 @@
+======== ./output_5_0_3/mr/checkpoint-0/mr_result.json ========
+Accuracy :  0.7
+
+======== ./output_5_1_1/mr/checkpoint-141/mr_result.json ========
+Accuracy :  0.91375
+
+======== ./output_5_1_1/mr/checkpoint-282/mr_result.json ========
+Accuracy :  0.91125
+
+======== ./output_5_1_1/mr/checkpoint-423/mr_result.json ========
+Accuracy :  0.921875
+
+======== ./output_5_1_1/mr/checkpoint-564/mr_result.json ========
+Accuracy :  0.920625
+
+======== ./output_5_1_1/mr/checkpoint-705/mr_result.json ========
+Accuracy :  0.9225
+
+======== ./output_5_1_1/mr/checkpoint-846/mr_result.json ========
+Accuracy :  0.91875
+
+======== ./output_5_1_1/mr/checkpoint-987/mr_result.json ========
+Accuracy :  0.91625
+
+======== ./output_5_1_1/mr/checkpoint-1128/mr_result.json ========
+Accuracy :  0.91625
+
+======== ./output_5_1_1/mr/checkpoint-1269/mr_result.json ========
+Accuracy :  0.914375
+
+======== ./output_5_1_1/mr/checkpoint-1410/mr_result.json ========
+Accuracy :  0.914375

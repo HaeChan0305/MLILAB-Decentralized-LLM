@@ -4,10 +4,16 @@ import matplotlib.pyplot as plt
 
 PATTERN_1 = "Accuracy :  "
 PATTERN_2 = "checkpoint-"
-STEPS_PER_EPOCH = {
+STEPS_PER_EPOCH_1 = {
     'agnews': None,
     'mr': 283,
     'r8': 171,
+    'sst2': None,
+}
+STEPS_PER_EPOCH_2 = {
+    'agnews': None,
+    'mr': 141,
+    'r8': 85,
     'sst2': None,
 }
 
@@ -24,7 +30,7 @@ def extract_accuracy(path):
             ret.append(float(line))    
     return ret
 
-def extract_epoch(path, dataset_name):
+def extract_epoch(path, dataset_name, steps_per_epoch):
     with open(path, 'r') as file:
         lines = file.readlines()
     
@@ -32,32 +38,34 @@ def extract_epoch(path, dataset_name):
     for line in lines:
         if PATTERN_2 in line:
             line = line.split(PATTERN_2)[1].split('/')[0]
-            ret.append(int(line) / STEPS_PER_EPOCH[dataset_name])    
+            ret.append(int(line) / steps_per_epoch[dataset_name])    
     return ret
 
 
 
 if __name__ == "__main__":
-    dataset_name = "mr"
+    dataset_name = "r8"
     
     save_path = f"./plot_{dataset_name}.png"
     
-    accuracys_1 = extract_accuracy(f"output_5_0_1/{dataset_name}/result.txt")    
-    epochs_1 = extract_epoch(f"output_5_0_1/{dataset_name}/result.txt", dataset_name)
+    accuracys_5_0_3 = extract_accuracy(f"output_5_0_3/{dataset_name}/result.txt")
+    epochs_5_0_3 = extract_epoch(f"output_5_0_3/{dataset_name}/result.txt", dataset_name, STEPS_PER_EPOCH_1)
     
-    accuracys_2 = extract_accuracy(f"output_5_0_2/{dataset_name}/result.txt")    
-    epochs_2 = extract_epoch(f"output_5_0_2/{dataset_name}/result.txt", dataset_name)
-
-    assert epochs_1 == epochs_2
+    accuracys_5_1_1 = extract_accuracy(f"output_5_1_1/{dataset_name}/result.txt")
+    epochs_5_1_1 = extract_epoch(f"output_5_1_1/{dataset_name}/result.txt", dataset_name, STEPS_PER_EPOCH_2)
+    
+    accuracys_5_1_2 = extract_accuracy(f"output_5_1_2/{dataset_name}/result.txt")
+    epochs_5_1_2 = extract_epoch(f"output_5_1_2/{dataset_name}/result.txt", dataset_name, STEPS_PER_EPOCH_2)
     
     # Plot the data
-    plt.plot(epochs_1, accuracys_1, label='No CARP')
-    plt.plot(epochs_2, accuracys_2, label='CARP')
+    plt.plot(epochs_5_0_3, accuracys_5_0_3, label='Baseline (Exp 5-0-3)')
+    plt.plot(epochs_5_1_1, accuracys_5_1_1, label='Client 1  (Exp 5-1-1)')
+    plt.plot(epochs_5_1_2, accuracys_5_1_2, label='Client 2  (Exp 5-1-2)')
 
     # Add labels and title
     plt.xlabel('Epoches')
     plt.ylabel('Accuracy')
-    plt.title(f'Accuracy : {dataset_name}')
+    plt.title(f'IID Clients\' Accuracy : {dataset_name}')
 
     # Add a legend
     plt.legend()

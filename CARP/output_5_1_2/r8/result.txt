@@ -1,0 +1,32 @@
+======== ./output_5_0_3/r8/checkpoint-0/r8_result.json ========
+Accuracy :  0.2987665600730927
+
+======== ./output_5_1_2/r8/checkpoint-85/r8_result.json ========
+Accuracy :  0.9534033805390589
+
+======== ./output_5_1_2/r8/checkpoint-170/r8_result.json ========
+Accuracy :  0.9611694837825491
+
+======== ./output_5_1_2/r8/checkpoint-255/r8_result.json ========
+Accuracy :  0.9730470534490635
+
+======== ./output_5_1_2/r8/checkpoint-340/r8_result.json ========
+Accuracy :  0.9785290086797624
+
+======== ./output_5_1_2/r8/checkpoint-425/r8_result.json ========
+Accuracy :  0.9725902238465053
+
+======== ./output_5_1_2/r8/checkpoint-510/r8_result.json ========
+Accuracy :  0.9739607126541799
+
+======== ./output_5_1_2/r8/checkpoint-595/r8_result.json ========
+Accuracy :  0.9744175422567383
+
+======== ./output_5_1_2/r8/checkpoint-680/r8_result.json ========
+Accuracy :  0.9757880310644129
+
+======== ./output_5_1_2/r8/checkpoint-765/r8_result.json ========
+Accuracy :  0.9735038830516217
+
+======== ./output_5_1_2/r8/checkpoint-850/r8_result.json ========
+Accuracy :  0.9739607126541799

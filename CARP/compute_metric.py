@@ -166,7 +166,7 @@ if __name__ == "__main__":
     # # JSON format 깨졌을 때 사용
     # predictions = [extract_answer_base(args.dataset_name, example['prediction']) for example in data] 
     
-    # exp_5_0_3
+    # exp_5_0_3 / exp_5_1_1 / exp_5_1_2
     predictions = [example['prediction'] for example in data] 
     
     print("Accuracy : ", accuracy(answers, predictions))
