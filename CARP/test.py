@@ -115,7 +115,7 @@ OUTPUT :"""
 
 # For exp 5-0-3
 def processing_text(tokenizer, messages):
-    assert 'assistant' not in [m['role'] for m in messages]
+    # assert 'assistant' not in [m['role'] for m in messages]
     return tokenizer.apply_chat_template(
         messages,
         tokenize=False,
@@ -135,7 +135,7 @@ def str2bool(v):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test HF checkpoint.")
     parser.add_argument("-c", "--checkpoint-path", type=str, help="Checkpoint path", default="Qwen/Qwen2-1.5B-Instruct")
-    parser.add_argument("-d", "--dataset", type=str, choices=['agnews', 'mr', 'r8', 'sst2'])
+    parser.add_argument("-d", "--dataset-path", type=str)
     parser.add_argument("-o", "--sample-output-file", type=str)
     parser.add_argument("-b", "--batch-size", type=int, default=1)
     # parser.add_argument("-e", "--use-carp", type=str2bool)
@@ -158,7 +158,7 @@ if __name__ == "__main__":
     # import pdb; pdb.set_trace()
     # test = pd.read_csv(f"./data/{args.dataset}_test.csv")
     test = []
-    with jsonlines.open(f"./data/{args.dataset}_test.jsonl") as file:
+    with jsonlines.open(args.dataset_path) as file:
         for line in file:
             test.append(line)
     test = [example["messages"] for example in test]
@@ -181,6 +181,7 @@ if __name__ == "__main__":
             batch = test[B * i : ]
         
         texts = [processing_text(tokenizer, msg[:-1]) for msg in batch]
+        # import pdb; pdb.set_trace()
         model_inputs = tokenizer(texts, return_tensors="pt", padding=True).to(device)
         
         generated_ids = model.generate(
@@ -197,10 +198,9 @@ if __name__ == "__main__":
         else:
             result = []
         
-        # import pdb; pdb.set_trace()
         result += [{
                     'prompt': texts[j],
-                    'answer': batch[j][2]['content'],
+                    'answer': batch[j][-1]['content'],
                     'prediction': predictions[j]
                    }
                    for j in range(len(predictions))]

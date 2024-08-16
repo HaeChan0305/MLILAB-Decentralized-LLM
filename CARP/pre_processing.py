@@ -1,4 +1,5 @@
 import os
+import argparse
 import json
 import jsonlines
 from sklearn import datasets
@@ -212,12 +213,54 @@ def split_train_data_iid(jsonl_path, dataset_name):
         for i in dataset_2: file.write(json.dumps(i) + "\n")
 
 
-if __name__=='__main__':
-    # dataset_names = ['agnews', 'mr', 'r8', 'sst2']
-    # for dataset_name in dataset_names:
-    #     split_train_data_iid(f"./data/{dataset_name}_train.jsonl", dataset_name)
-
-    # dataset_name = 'r8'
-    # check_class_imbalance_jsonl(f"./data/{dataset_name}_train_1.jsonl", dataset_name)
-    # check_class_imbalance_jsonl(f"./data/{dataset_name}_train_2.jsonl", dataset_name)
+def preprocessing_for_debate(dataset_name, checkpoint, client1, client2, r):
+    test = []
     
+    if r == 1:
+        prev_test_path = f"./data/{dataset_name}_test.jsonl"
+        prev_result_path = f"{dataset_name}_result.json"
+    else:
+        prev_test_path = f"./output_5_1_{client1}/{dataset_name}/checkpoint-{checkpoint}/{dataset_name}_test_round_{r - 1}.jsonl"
+        prev_result_path = f"{dataset_name}_result_round_{r - 1}.json"
+        
+    with jsonlines.open(prev_test_path) as file:
+        for line in file:
+            test.append(line)
+
+
+    with open(f"./output_5_1_{client1}/{dataset_name}/checkpoint-{checkpoint}/{prev_result_path}", "r") as file:
+        client_1_data = json.load(file)
+        client_1_answers = [example['prediction'] for example in client_1_data] 
+        
+    with open(f"./output_5_1_{client2}/{dataset_name}/checkpoint-{checkpoint}/{prev_result_path}", "r") as file:
+        client_2_data = json.load(file)
+        client_2_answers = [example['prediction'] for example in client_2_data] 
+
+    assert len(test) == len(client_1_answers)
+    assert len(test) == len(client_2_answers)
+
+    new_test = []
+    for t, c1, c2 in zip(test, client_1_answers, client_2_answers):
+        t['messages'].insert(-1, {"role" : "assistant",
+                                  "content" : c1})
+        
+        t['messages'].insert(-1, {"role" : "user",
+                                  "content" : f"This is the recent/updated answer from another agent: {c2}. Use this answer carefully as additional advice, {t['messages'][1]['content']}"})
+        
+        new_test.append(t)
+
+    with open(f"./output_5_1_{client1}/{dataset_name}/checkpoint-{checkpoint}/{dataset_name}_test_round_{r}.jsonl" , encoding= "utf-8",mode="w") as file: 
+        for i in new_test: file.write(json.dumps(i) + "\n")
+        
+
+if __name__=='__main__':
+    parser = argparse.ArgumentParser(description="Test HF checkpoint.")
+    parser.add_argument("-d", "--dataset-name", type=str, choices=['agnews', 'mr', 'r8', 'sst2'])
+    parser.add_argument("-c", "--checkpoint", type=int, help="Checkpoint path")
+    parser.add_argument("-c1", "--client1", type=int)
+    parser.add_argument("-c2", "--client2", type=int)
+    parser.add_argument("-r", "--round", type=int)
+
+    args = parser.parse_args()
+    
+    preprocessing_for_debate(args.dataset_name, args.checkpoint, args.client1, args.client2, args.round)

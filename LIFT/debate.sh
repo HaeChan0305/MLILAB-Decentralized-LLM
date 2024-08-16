@@ -10,3 +10,4 @@ do
     # cp /workspace/output_qwen_4_2/checkpoint-$((STEP * i))/result.json ./results/output_qwen_4_2/checkpoint-$((STEP * i))/result.json
 done
 
+python pre_processing.py -d "mr" -c 141 -c1 1 -c2 2 -r 1
