@@ -1,0 +1,30 @@
+
+======== ./output_5_1_2/r8/checkpoint-85/r8_result_round_1.json ========
+Accuracy :  0.9671082686158063
+
+======== ./output_5_1_2/r8/checkpoint-170/r8_result_round_1.json ========
+Accuracy :  0.9693924166285975
+
+======== ./output_5_1_2/r8/checkpoint-255/r8_result_round_1.json ========
+Accuracy :  0.968478757423481
+
+======== ./output_5_1_2/r8/checkpoint-340/r8_result_round_1.json ========
+Accuracy :  0.972133394243947
+
+======== ./output_5_1_2/r8/checkpoint-425/r8_result_round_1.json ========
+Accuracy :  0.9730470534490635
+
+======== ./output_5_1_2/r8/checkpoint-510/r8_result_round_1.json ========
+Accuracy :  0.9753312014618547
+
+======== ./output_5_1_2/r8/checkpoint-595/r8_result_round_1.json ========
+Accuracy :  0.9748743718592965
+
+======== ./output_5_1_2/r8/checkpoint-680/r8_result_round_1.json ========
+Accuracy :  0.972133394243947
+
+======== ./output_5_1_2/r8/checkpoint-765/r8_result_round_1.json ========
+Accuracy :  0.9725902238465053
+
+======== ./output_5_1_2/r8/checkpoint-850/r8_result_round_1.json ========
+Accuracy :  0.9712197350388305

@@ -44,28 +44,35 @@ def extract_epoch(path, dataset_name, steps_per_epoch):
 
 
 if __name__ == "__main__":
-    dataset_name = "r8"
+    dataset_name = "mr"
+    client = 2
     
-    save_path = f"./plot_{dataset_name}.png"
+    save_path = f"./plot_debate_{dataset_name}_client2.png"
     
-    accuracys_5_0_3 = extract_accuracy(f"output_5_0_3/{dataset_name}/result.txt")
-    epochs_5_0_3 = extract_epoch(f"output_5_0_3/{dataset_name}/result.txt", dataset_name, STEPS_PER_EPOCH_1)
-    
-    accuracys_5_1_1 = extract_accuracy(f"output_5_1_1/{dataset_name}/result.txt")
-    epochs_5_1_1 = extract_epoch(f"output_5_1_1/{dataset_name}/result.txt", dataset_name, STEPS_PER_EPOCH_2)
-    
-    accuracys_5_1_2 = extract_accuracy(f"output_5_1_2/{dataset_name}/result.txt")
-    epochs_5_1_2 = extract_epoch(f"output_5_1_2/{dataset_name}/result.txt", dataset_name, STEPS_PER_EPOCH_2)
-    
+    accuracyss = []
+    epochss = []
+    for round in range(9):
+        if round == 0:
+            result_path = "result.txt"
+            accuracys = extract_accuracy(f"output_5_1_{client}/{dataset_name}/{result_path}")[1:]
+            epochs = extract_epoch(f"output_5_1_{client}/{dataset_name}/{result_path}", dataset_name, STEPS_PER_EPOCH_2)[1:]
+        else:
+            result_path = f"result_round_{round}.txt"
+            accuracys = extract_accuracy(f"output_5_1_{client}/{dataset_name}/{result_path}")
+            epochs = extract_epoch(f"output_5_1_{client}/{dataset_name}/{result_path}", dataset_name, STEPS_PER_EPOCH_2)
+
+        accuracyss.append(accuracys)
+        epochss.append(epochs)
+
     # Plot the data
-    plt.plot(epochs_5_0_3, accuracys_5_0_3, label='Baseline (Exp 5-0-3)')
-    plt.plot(epochs_5_1_1, accuracys_5_1_1, label='Client 1  (Exp 5-1-1)')
-    plt.plot(epochs_5_1_2, accuracys_5_1_2, label='Client 2  (Exp 5-1-2)')
+    for i, (accuracys, epochs) in enumerate(zip(accuracyss, epochss)):
+        plt.plot(epochs, accuracys, label=f'Client {client} - Round {i}')
+    
 
     # Add labels and title
     plt.xlabel('Epoches')
     plt.ylabel('Accuracy')
-    plt.title(f'IID Clients\' Accuracy : {dataset_name}')
+    plt.title(f'IID Client {client} Debate Accuracy : {dataset_name}')
 
     # Add a legend
     plt.legend()
