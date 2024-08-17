@@ -206,12 +206,36 @@ def split_train_data_iid(jsonl_path, dataset_name):
     shuffle(dataset_1)
     shuffle(dataset_2)
     
+    with open(jsonl_path.replace("train.jsonl", "train_1_iid.jsonl") , "w") as file: 
+        for i in dataset_1: file.write(json.dumps(i) + "\n")
+        
+    with open(jsonl_path.replace("train.jsonl", "train_2_iid.jsonl") , "w") as file: 
+        for i in dataset_2: file.write(json.dumps(i) + "\n")
+
+def split_train_data_non_iid(jsonl_path, dataset_name):
+    train = []
+    with jsonlines.open(jsonl_path) as file:
+        for line in file:
+            train.append(line)
+    
+    dataset_per_labels = {}
+    for choice in CHOICES[dataset_name]:
+        dataset_per_labels[choice] = [example for example in train if example['messages'][-1]['content'] == choice]
+
+    dataset_1 = []
+    dataset_2 = []
+    for dataset in dataset_per_labels.values():
+        dataset_1 += dataset[:len(dataset)//2]
+        dataset_2 += dataset[len(dataset)//2:]
+        
+    shuffle(dataset_1)
+    shuffle(dataset_2)
+    
     with open(jsonl_path.replace("train.jsonl", "train_1.jsonl") , "w") as file: 
         for i in dataset_1: file.write(json.dumps(i) + "\n")
         
     with open(jsonl_path.replace("train.jsonl", "train_2.jsonl") , "w") as file: 
         for i in dataset_2: file.write(json.dumps(i) + "\n")
-
 
 def preprocessing_for_debate_same_checkpoint(dataset_name, checkpoint, client1, client2, r):
     test = []
@@ -256,7 +280,7 @@ def preprocessing_for_debate(dataset_name, client1, client2, r):
     test = []
     
     if r == 1:
-        prev_test_path = f"./data/{dataset_name}_test.jsonl"
+        prev_test_path = f"./data/{dataset_name}/{dataset_name}_test.jsonl"
         prev_result_path = f"{dataset_name}_result.json"
     else:
         prev_test_path = f"./output_5_2_{client1}/{dataset_name}/{dataset_name}_test_round_{r - 1}.jsonl"
@@ -287,7 +311,7 @@ def preprocessing_for_debate(dataset_name, client1, client2, r):
         
         new_test.append(t)
 
-    with open(f"./output_2_{client1}/{dataset_name}/{dataset_name}_test_round_{r}.jsonl" , encoding= "utf-8",mode="w") as file: 
+    with open(f"./output_5_2_{client1}/{dataset_name}/{dataset_name}_test_round_{r}.jsonl" , encoding= "utf-8",mode="w") as file: 
         for i in new_test: file.write(json.dumps(i) + "\n")
         
 

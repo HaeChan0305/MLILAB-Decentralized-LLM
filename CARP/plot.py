@@ -41,9 +41,7 @@ def extract_epoch(path, dataset_name, steps_per_epoch):
             ret.append(int(line) / steps_per_epoch[dataset_name])    
     return ret
 
-
-
-if __name__ == "__main__":
+def plot_exp_5_2_1():
     dataset_name = "mr"
     client = 2
     
@@ -71,6 +69,31 @@ if __name__ == "__main__":
 
     # Add labels and title
     plt.xlabel('Epoches')
+    plt.ylabel('Accuracy')
+    plt.title(f'IID Client {client} Debate Accuracy : {dataset_name}')
+
+    # Add a legend
+    plt.legend()
+
+    # Show the plot
+    plt.show()
+    plt.savefig(save_path)
+
+
+if __name__ == "__main__":
+    dataset_name = "mr"
+    client = 2
+    
+    save_path = f"./plot_debate_{dataset_name}_client{client}.png"
+    
+    accuracys = extract_accuracy(f"output_5_2_{client}/{dataset_name}/result.txt")
+    rounds = range(len(accuracys))
+    
+    # Plot the data
+    plt.plot(rounds, accuracys, label=f'Client {client}')
+    
+    # Add labels and title
+    plt.xlabel('Rounds')
     plt.ylabel('Accuracy')
     plt.title(f'IID Client {client} Debate Accuracy : {dataset_name}')
 

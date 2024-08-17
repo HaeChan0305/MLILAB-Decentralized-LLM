@@ -1,0 +1,27 @@
+
+======== ./output_5_2_2/mr/mr_result.json ========
+Accuracy :  0.921875
+
+======== ./output_5_2_2/mr/mr_result_round_1.json ========
+Accuracy :  0.9225
+
+======== ./output_5_2_2/mr/mr_result_round_2.json ========
+Accuracy :  0.924375
+
+======== ./output_5_2_2/mr/mr_result_round_3.json ========
+Accuracy :  0.92375
+
+======== ./output_5_2_2/mr/mr_result_round_4.json ========
+Accuracy :  0.92375
+
+======== ./output_5_2_2/mr/mr_result_round_5.json ========
+Accuracy :  0.9225
+
+======== ./output_5_2_2/mr/mr_result_round_6.json ========
+Accuracy :  0.924375
+
+======== ./output_5_2_2/mr/mr_result_round_7.json ========
+Accuracy :  0.9225
+
+======== ./output_5_2_2/mr/mr_result_round_8.json ========
+Accuracy :  0.924375
